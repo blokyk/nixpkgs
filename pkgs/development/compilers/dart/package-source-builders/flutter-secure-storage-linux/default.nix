@@ -1,5 +1,7 @@
 {
   stdenv,
+  libgcrypt,
+  libgpg-error,
   libsecret,
   jsoncpp,
 }:
@@ -14,6 +16,11 @@ stdenv.mkDerivation {
   propagatedBuildInputs = [
     libsecret
     jsoncpp
+
+    # hack: these are dependencies of libsecret and ideally shouldn't be here,
+    #       but they're currently required for dumb nix reasons
+    libgcrypt
+    libgpg-error
   ];
 
   installPhase = ''
